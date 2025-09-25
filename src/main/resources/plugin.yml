@@ -1,0 +1,10 @@
+name: ShinySMP
+version: '1.0-SNAPSHOT'
+main: com.pinont.shinySMP.Core
+api-version: '1.21'
+
+permissions:
+  shinysmp.*:
+    description: Gives access to all ShinySMP commands and features
+  shinysmp.admin:
+    description: Gives access to all ShinySMP admin commands and features
