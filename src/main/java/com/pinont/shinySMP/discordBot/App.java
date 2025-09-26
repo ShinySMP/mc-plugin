@@ -1,54 +1,70 @@
 package com.pinont.shinySMP.discordBot;
 
-import com.pinont.lib.api.manager.ConfigManager;
-import com.pinont.shinySMP.Core;
+import com.pinont.lib.api.hook.discordJDA.DiscordApp;
+import com.pinont.shinySMP.discordBot.commands.Join;
 import com.pinont.shinySMP.discordBot.commands.Register;
-import com.pinont.shinySMP.discordBot.events.ReadyListener;
-import net.dv8tion.jda.api.JDABuilder;
-import org.bukkit.ChatColor;
-import org.bukkit.configuration.file.FileConfiguration;
+import com.pinont.shinySMP.discordBot.commands.Setup;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.events.session.ReadyEvent;
+import org.bukkit.Bukkit;
 
-public class App {
-    private Thread jdaThread;
-    private net.dv8tion.jda.api.JDA jda;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
-    public void reloadConfig() {
-        shutdown();
-        start();
+public class App extends DiscordApp {
+    private final List<Activity> activities;
+    private ScheduledExecutorService scheduler;
+    private Activity currentActivity;
+
+    public App() {
+        super("discord_bot.yml", true);
+        this.activities = new ArrayList<>();
+        activities.add(Activity.playing("Shiny SMP"));
+        activities.add(Activity.customStatus("Developing Shiny SMP"));
+        activities.add(Activity.listening("/register"));
     }
 
-    public void start() {
-        ConfigManager configManager = new ConfigManager("discord_bot.yml");
-        FileConfiguration config = configManager.getConfig();
-        if (config.getString("bot_token") == null) {
-            configManager.set("bot_token", "BOT_TOKEN_HERE");
-            configManager.saveConfig();
-            Core.sendConsoleMessage(ChatColor.RED + "Please set the bot_token in discord_bot.yml");
-            return;
-        }
-        try {
-            jdaThread = new Thread(() -> {
-                String token = config.getString("bot_token");
-                JDABuilder bot = JDABuilder.createDefault(token);
-                Register register = new Register();
-                jda = bot.addEventListeners(register, new ReadyListener(register))
-                        .build();
-            }, "JDA-Thread");
-            jdaThread.start();
-        } catch (Exception e) {
-            Core.sendConsoleMessage(ChatColor.RED + "Make sure you have correct bot token in discord_bot.yml");
-            throw e;
+    @Override
+    public void onStartup() {
+        addCommands(new Register(), new Setup(), new Join());
+    }
+
+    @Override
+    public void onAppReady(ReadyEvent readyEvent) {
+        JDA jda = readyEvent.getJDA();
+        scheduler = Executors.newScheduledThreadPool(2); // 2 threads for activity updates
+        setRandomActivity(jda);
+        // Change activity every hour
+        scheduler.scheduleAtFixedRate(() -> setRandomActivity(jda), 1, 1, TimeUnit.HOURS);
+    }
+
+    private void setRandomActivity(JDA jda) {
+        Random rand = new Random();
+        int idx = rand.nextInt(activities.size() + 1); // +1 for watching
+        if (idx < activities.size()) {
+            currentActivity = activities.get(idx);
+            jda.getPresence().setActivity(currentActivity);
+        } else {
+            // Watching activity: update every minute
+            updateWatchingActivity(jda);
+            scheduler.scheduleAtFixedRate(() -> updateWatchingActivity(jda), 1, 1, TimeUnit.MINUTES);
         }
     }
 
-    public void shutdown() {
-        if (jda != null) {
-            jda.shutdown();
-        }
-        if (jdaThread != null && jdaThread.isAlive()) {
-            try {
-                jdaThread.join(5000); // Wait up to 5 seconds for thread to finish
-            } catch (InterruptedException ignored) {}
-        }
+    private void updateWatchingActivity(JDA jda) {
+        int playerCount = Bukkit.getOnlinePlayers().size();
+        Activity watching = Activity.watching(playerCount + " players");
+        currentActivity = watching;
+        jda.getPresence().setActivity(watching);
+    }
+
+    @Override
+    public void onShutdown() {
+
     }
 }
