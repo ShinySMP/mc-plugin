@@ -9,6 +9,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.Collection;
+import java.util.List;
+
 @AutoRegister
 public class ShinySMP implements SimpleCommand {
 
@@ -31,18 +34,17 @@ public class ShinySMP implements SimpleCommand {
     public void execute(CommandSourceStack commandSourceStack, String[] strings) {
         CommandSender sender = commandSourceStack.getSender();
         if (strings.length == 0) {
-            sender.sendMessage(ChatColor.YELLOW + "\n====================\n" +
+            sender.sendMessage(ChatColor.YELLOW + "====================\n" +
                     ChatColor.GREEN + "Welcome to ShinySMP\n" +
                     ChatColor.AQUA + "Version: " + ChatColor.WHITE + CorePlugin.getInstance().getDescription().getVersion() + "\n" +
-                    ChatColor.AQUA + "API Version: " + ChatColor.WHITE + CorePlugin.getAPIVersion() + "\n" +
                     ChatColor.YELLOW + "====================\n"
             );
             return;
         }
         if (strings[0].equalsIgnoreCase("reload")) {
-            reload();
+            reload(sender);
         } else if (strings[0].equalsIgnoreCase("discord")) {
-            discord(strings);
+            discord(sender, strings);
         } else {
             sender.sendMessage(ChatColor.YELLOW + "====================\n" +
                     ChatColor.GREEN + "Welcome to ShinySMP\n" +
@@ -53,17 +55,22 @@ public class ShinySMP implements SimpleCommand {
         }
     }
 
-    private void reload() {
-        CorePlugin.getInstance().reloadConfig();
-        CorePlugin.sendConsoleMessage("Config reloaded!");
+    @Override
+    public Collection<String> suggest(CommandSourceStack commandSourceStack, String[] args) {
+        return List.of("discord");
     }
 
-    private void discord(String[] args) {
+    private void reload(CommandSender sender) {
+        CorePlugin.getInstance().reloadConfig();
+        sender.sendMessage("Config reloaded!");
+    }
+
+    private void discord(CommandSender sender, String[] args) {
         if (args.length > 1 && args[1].equalsIgnoreCase("reload")) {
             new App().reloadConfig();
-            CorePlugin.sendConsoleMessage("Discord Config reloaded!");
+            sender.sendMessage("Discord Config reloaded!");
             return;
         }
-        CorePlugin.sendConsoleMessage("Discord link: https://discord.gg/shinysmp");
+        sender.sendMessage("Discord link: https://discord.gg/shinysmp");
     }
 }

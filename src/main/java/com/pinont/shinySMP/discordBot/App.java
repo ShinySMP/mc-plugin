@@ -1,7 +1,6 @@
 package com.pinont.shinySMP.discordBot;
 
 import com.pinont.lib.api.hook.discordJDA.DiscordApp;
-import com.pinont.shinySMP.discordBot.commands.Join;
 import com.pinont.shinySMP.discordBot.commands.Register;
 import com.pinont.shinySMP.discordBot.commands.Setup;
 import net.dv8tion.jda.api.JDA;
@@ -31,7 +30,7 @@ public class App extends DiscordApp {
 
     @Override
     public void onStartup() {
-        addCommands(new Register(), new Setup(), new Join());
+        addCommands(new Register(), new Setup());
     }
 
     @Override
