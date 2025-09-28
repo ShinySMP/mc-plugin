@@ -1,9 +1,9 @@
-package com.pinont.shinySMP.commands;
+package com.github.pinont.shinysmp.commands;
 
 import com.github.pinont.singularitylib.api.annotation.AutoRegister;
 import com.github.pinont.singularitylib.api.command.SimpleCommand;
 import com.github.pinont.singularitylib.plugin.CorePlugin;
-import com.pinont.shinySMP.discordBot.App;
+import com.github.pinont.shinysmp.discordBot.App;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;

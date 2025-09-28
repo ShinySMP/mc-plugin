@@ -1,10 +1,10 @@
-package com.pinont.shinySMP.discordBot.commands;
+package com.github.pinont.shinysmp.discordBot.commands;
 
 import com.github.pinont.singularitylib.api.hook.discordJDA.SimpleSlashCommands;
 import com.github.pinont.singularitylib.api.hook.discordJDA.SlashCommandComponent;
 import com.github.pinont.singularitylib.api.manager.ConfigManager;
 import com.github.pinont.singularitylib.api.utils.Console;
-import com.pinont.shinySMP.Core;
+import com.github.pinont.shinysmp.Core;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;

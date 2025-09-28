@@ -1,6 +1,6 @@
 name: ShinySMP
 version: '1.0-SNAPSHOT'
-main: com.pinont.shinySMP.Core
+main: com.github.pinont.shinysmp.Core
 api-version: '1.21'
 
 permissions:

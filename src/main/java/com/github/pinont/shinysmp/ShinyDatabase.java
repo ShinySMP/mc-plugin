@@ -1,4 +1,4 @@
-package com.pinont.shinySMP;
+package com.github.pinont.shinysmp;
 
 import com.github.pinont.singularitylib.api.utils.MySQL;
 

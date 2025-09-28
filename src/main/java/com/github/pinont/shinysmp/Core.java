@@ -1,9 +1,9 @@
-package com.pinont.shinySMP;
+package com.github.pinont.shinysmp;
 
 
 import com.github.pinont.singularitylib.api.manager.ConfigManager;
 import com.github.pinont.singularitylib.plugin.CorePlugin;
-import com.pinont.shinySMP.discordBot.App;
+import com.github.pinont.shinysmp.discordBot.App;
 
 public class Core extends CorePlugin {
 

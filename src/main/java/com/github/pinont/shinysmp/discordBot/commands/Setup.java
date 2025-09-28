@@ -1,4 +1,4 @@
-package com.pinont.shinySMP.discordBot.commands;
+package com.github.pinont.shinysmp.discordBot.commands;
 
 import com.github.pinont.singularitylib.api.hook.discordJDA.SimpleSlashCommands;
 import com.github.pinont.singularitylib.api.hook.discordJDA.SlashCommandComponent;

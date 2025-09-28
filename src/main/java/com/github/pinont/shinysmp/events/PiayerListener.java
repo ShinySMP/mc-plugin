@@ -1,8 +1,8 @@
-package com.pinont.shinySMP.events;
+package com.github.pinont.shinysmp.events;
 
 import com.github.pinont.singularitylib.api.annotation.AutoRegister;
 import com.github.pinont.singularitylib.api.utils.Common;
-import com.pinont.shinySMP.Core;
+import com.github.pinont.shinysmp.Core;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

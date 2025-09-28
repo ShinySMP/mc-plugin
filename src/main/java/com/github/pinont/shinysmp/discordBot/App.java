@@ -1,8 +1,8 @@
-package com.pinont.shinySMP.discordBot;
+package com.github.pinont.shinysmp.discordBot;
 
 import com.github.pinont.singularitylib.api.hook.discordJDA.DiscordApp;
-import com.pinont.shinySMP.discordBot.commands.Register;
-import com.pinont.shinySMP.discordBot.commands.Setup;
+import com.github.pinont.shinysmp.discordBot.commands.Register;
+import com.github.pinont.shinysmp.discordBot.commands.Setup;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.events.session.ReadyEvent;
