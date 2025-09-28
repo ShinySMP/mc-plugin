@@ -9,20 +9,19 @@ public class Core extends CorePlugin {
     public static ConfigManager registeredPlayers;
 
     App app;
-    ShinyDatabase database = new ShinyDatabase();
+//    ShinyDatabase database = new ShinyDatabase();
 
     @Override
     public void onPluginStart() {
         app = new App();
         registeredPlayers = new ConfigManager("registered_players.yml");
-        database.init("database.yml");
+//        database.init("database.yml");
         app.start();
-        getServer().setWhitelist(true);
     }
 
     @Override
     public void onPluginStop() {
         app.shutdown();
-        database.closeConnection();
+//        database.closeConnection();
     }
 }

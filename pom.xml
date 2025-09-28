@@ -12,6 +12,7 @@
     <name>ShinySMP</name>
 
     <properties>
+        <singularitylib.version>v2.2.0</singularitylib.version>
         <java.version>23</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -90,7 +91,7 @@
         <dependency>
             <groupId>com.github.Pinont</groupId>
             <artifactId>SingularityLib</artifactId>
-            <version>SNAPSHOT</version>
+            <version>${singularitylib.version}</version>
         </dependency>
         <dependency>
             <groupId>net.dv8tion</groupId>
