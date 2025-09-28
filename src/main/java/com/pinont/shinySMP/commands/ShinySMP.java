@@ -1,8 +1,8 @@
 package com.pinont.shinySMP.commands;
 
-import com.pinont.lib.api.annotation.AutoRegister;
-import com.pinont.lib.api.command.SimpleCommand;
-import com.pinont.lib.plugin.CorePlugin;
+import com.github.pinont.singularitylib.api.annotation.AutoRegister;
+import com.github.pinont.singularitylib.api.command.SimpleCommand;
+import com.github.pinont.singularitylib.plugin.CorePlugin;
 import com.pinont.shinySMP.discordBot.App;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import org.bukkit.ChatColor;

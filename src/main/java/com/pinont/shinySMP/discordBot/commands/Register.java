@@ -1,8 +1,9 @@
 package com.pinont.shinySMP.discordBot.commands;
 
-import com.pinont.lib.api.hook.discordJDA.SimpleSlashCommands;
-import com.pinont.lib.api.hook.discordJDA.SlashCommandComponent;
-import com.pinont.lib.api.manager.ConfigManager;
+import com.github.pinont.singularitylib.api.hook.discordJDA.SimpleSlashCommands;
+import com.github.pinont.singularitylib.api.hook.discordJDA.SlashCommandComponent;
+import com.github.pinont.singularitylib.api.manager.ConfigManager;
+import com.github.pinont.singularitylib.api.utils.Console;
 import com.pinont.shinySMP.Core;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
@@ -13,7 +14,6 @@ import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 
 import java.util.Objects;
 
-import static com.pinont.lib.plugin.CorePlugin.sendConsoleMessage;
 
 public class Register extends SimpleSlashCommands {
 
@@ -78,6 +78,6 @@ public class Register extends SimpleSlashCommands {
         Core.registeredPlayers.set(nameArg, event.getUser().getId());
         Core.registeredPlayers.saveConfig();
         guild.addRoleToMember(member, whitelistedRole).queue();
-        sendConsoleMessage("Signed " + nameArg + " into the whitelist!");
+        Console.log("Signed " + nameArg + " into the whitelist!");
     }
 }

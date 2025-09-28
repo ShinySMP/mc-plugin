@@ -12,7 +12,7 @@
     <name>ShinySMP</name>
 
     <properties>
-        <singularitylib.version>v2.2.0</singularitylib.version>
+        <singularitylib.version>v2.2.1-SNAPSHOT</singularitylib.version>
         <java.version>23</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
